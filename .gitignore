@@ -3,3 +3,5 @@ cache/
 *.jsonl
 *.parquet
 .env
+.log
+.aux
