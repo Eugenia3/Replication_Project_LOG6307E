@@ -9,6 +9,7 @@
 \usepackage{url}
 \usepackage{textcomp}
 \usepackage{float}
+\usepackage{hyperref}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125em X}}
 
@@ -59,7 +60,8 @@ Two research questions guide our analysis of AI-agent and human pull requests: \
 \subsection{Data collection}
 We use the AIDev dataset released with~\cite{li2025rise} (Hugging Face \texttt{hao-li/AIDev}, revision v3), the dataset behind the course repository \texttt{SAILResearch/AI\_Teammates\_in\_SE3}. It lists PRs opened by AI coding agents and, as a baseline, human PRs. We concatenated both tables, removed duplicate PR ids, kept all human PRs, and drew a random 50\% sample of the (much larger) AI table (seed 42). Each PR URL was parsed into owner/repository/number, and every PR was queried through the GitHub GraphQL API~\cite{githubgql} (15 PRs per request) for state, creation/close/merge timestamps, author login and account type, issue comments (first 100), reviews (first 50: state, submission time, body, author) and inline review comments (first 50 per review). The script waits for the rate-limit reset and retries failed batches. Of 23{,}416 sampled PRs, 22{,}710 were retrieved. 706 (3.0\%) no longer resolve (deleted or renamed repositories, disabled PRs) and were dropped. Mining ran in late September 2026.
 
-\emph{Replication package:} \url{https://github.com/Eugenia3/Replication_Project_LOG6307E} (Colab pipeline, data archive, and this report).
+GitHub link :
+\textbf{\url{https://github.com/Eugenia3/Replication_Project_LOG6307E}}
 
 \subsection{Cleaning and classification}
 \textbf{AI vs.\ human.} We rely on AIDev's group label (PR opened by one of the dataset's AI agents vs.\ a human-authored PR) rather than our own heuristic. \\
@@ -148,8 +150,9 @@ Human interaction with AI PRs is consistently lower across all collaboration met
 \begin{figure}[t]
 \centering
 \includegraphics[height=2.2in]{figures/rq2_n_comments_boxplot.png}\hfill
-\includegraphics[height=2.2in]{figures/rq2_response_time_boxplot.png}
-\caption{RQ2. Left: discussion volume (comments and reviews per PR, outliers hidden). Right: first response time of PRs in hours (outliers hidden).}
+\includegraphics[height=2.2in]{figures/rq2_language_rate_bar.png}
+\caption{RQ2. Left: discussion volume (comments and reviews per PR, outliers hidden). Right:  share of PRs with clarification, approval or rejection language,
+an approving review, or a changes-requested review.}
 \label{fig:rq2}
 \end{figure}
 
